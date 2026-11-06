@@ -56,7 +56,7 @@
     <!-- Main Navigation Header -->
     <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchSection('applicants')">
+            <div id="logo-home-btn" class="flex items-center space-x-3 cursor-pointer">
                 <!-- Top-Left Logo Image -->
                 <img src="YOUR_IMAGE_URL_HERE" alt="RCT Touch Logo" class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-blue-500/20 border border-blue-500/30">
                 <div>
@@ -67,11 +67,11 @@
 
             <!-- Dual Directory Switcher Navbar -->
             <nav class="flex items-center space-x-2 sm:space-x-3">
-                <button id="nav-sec-applicants" onclick="switchSection('applicants')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
+                <button id="nav-sec-applicants" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
                     <i class="fa-solid fa-users-viewfinder text-yellow-300"></i>
                     <span>Player / Applicant Board</span>
                 </button>
-                <button id="nav-sec-corps" onclick="switchSection('corps')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                <button id="nav-sec-corps" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                     <i class="fa-solid fa-building text-red-500"></i>
                     <span>Corp Directory & Ads</span>
                 </button>
@@ -97,7 +97,7 @@
                         CEOs can browse active players looking for a home, check their stats, and invite them directly! Post your own profile below.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <button onclick="toggleApplicantModal(true)" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
+                        <button id="open-applicant-modal-btn" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
                             <i class="fa-solid fa-user-plus mr-2 text-yellow-300"></i> Post Your Player Profile
                         </button>
                     </div>
@@ -108,7 +108,7 @@
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full md:w-96">
                     <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                    <input type="text" id="app-search-input" oninput="renderApplicants()" placeholder="Search by Player Name or ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                    <input type="text" id="app-search-input" placeholder="Search by Player Name or ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div class="text-xs text-slate-400">
                     Showing active player profiles looking for invitations.
@@ -123,7 +123,7 @@
                 <i class="fa-solid fa-user-slash text-4xl text-slate-600 mb-3"></i>
                 <h3 class="text-lg font-bold text-white">No active player profiles found</h3>
                 <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Be the first player to post your info for CEOs to see!</p>
-                <button onclick="toggleApplicantModal(true)" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-all">
+                <button id="empty-open-applicant-modal-btn" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-all">
                     Post Your Player Profile
                 </button>
             </div>
@@ -140,8 +140,8 @@
                     <p class="text-xs text-slate-400 mt-0.5">Find active corps or post your corp listing for members.</p>
                 </div>
                 <div class="flex gap-2">
-                    <button id="corp-tab-browse-btn" onclick="switchCorpSubTab('browse')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">Browse Ads</button>
-                    <button id="corp-tab-post-btn" onclick="switchCorpSubTab('post')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition-all">List a Corp</button>
+                    <button id="corp-tab-browse-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">Browse Ads</button>
+                    <button id="corp-tab-post-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition-all">List a Corp</button>
                 </div>
             </div>
 
@@ -150,13 +150,13 @@
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div class="relative w-full md:w-96">
                         <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                        <input type="text" id="search-input" oninput="renderListings()" placeholder="Search by Corp Name or Corp ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                        <input type="text" id="search-input" placeholder="Search by Corp Name or Corp ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                     </div>
                     
                     <div class="flex flex-wrap sm:flex-nowrap gap-3 w-full md:w-auto items-center">
                         <div class="flex items-center gap-2 w-1/2 sm:w-auto">
                             <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Min Level:</span>
-                            <select id="filter-level" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
+                            <select id="filter-level" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
                                 <option value="0">All Levels</option>
                                 <option value="10">Level 10+</option>
                                 <option value="25">Level 25+</option>
@@ -168,14 +168,14 @@
 
                         <div class="flex items-center gap-2 w-1/2 sm:w-auto">
                             <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Sort By:</span>
-                            <select id="filter-sort" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
+                            <select id="filter-sort" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
                                 <option value="newest">Newest First</option>
                                 <option value="expiring">Expiring Soonest</option>
                                 <option value="seeking">Most Spots Open</option>
                             </select>
                         </div>
 
-                        <button onclick="resetFilters()" class="text-xs px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+                        <button id="reset-filters-btn" class="text-xs px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
                             Reset
                         </button>
                     </div>
@@ -187,7 +187,7 @@
                     <i class="fa-solid fa-ghost text-4xl text-slate-600 mb-3"></i>
                     <h3 class="text-lg font-bold text-white">No active corporations found</h3>
                     <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Try adjusting your filters or be the first to list a new corporation!</p>
-                    <button onclick="switchCorpSubTab('post')" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-all">
+                    <button id="empty-post-corp-btn" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-all">
                         Post a Corp Listing
                     </button>
                 </div>
@@ -205,7 +205,7 @@
                         </p>
                     </div>
 
-                    <form id="post-corp-form" onsubmit="handlePostCorp(event)" class="space-y-4">
+                    <form id="post-corp-form" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corporation Name *</label>
@@ -269,13 +269,13 @@
                     <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider">Player Board</span>
                     <h3 class="font-display text-xl font-bold text-white">Post Your Player Profile</h3>
                 </div>
-                <button onclick="toggleApplicantModal(false)" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <button id="close-applicant-modal-btn" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <div class="p-5">
-                <form id="applicant-form" onsubmit="handlePostApplicant(event)" class="space-y-4">
+                <form id="applicant-form" class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your In-Game Name *</label>
                         <input type="text" id="applicant-name" required placeholder="e.g. CoasterKing99" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
@@ -319,7 +319,7 @@
                     <h3 id="modal-corp-name" class="font-display text-xl font-bold text-white">Corporation Name</h3>
                     <p id="modal-corp-id" class="text-xs text-slate-400 font-mono">ID: #00000</p>
                 </div>
-                <button onclick="closeApplyModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <button id="close-apply-modal-btn" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -353,7 +353,7 @@
                     </div>
                 </div>
 
-                <form id="apply-form" onsubmit="submitApplication(event)" class="space-y-3">
+                <form id="apply-form" class="space-y-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your RCT Player ID *</label>
                         <input type="text" id="app-player-id" required placeholder="Found in your RCT Profile settings" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
@@ -362,15 +362,15 @@
                     <div class="grid grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">Your Level *</label>
-                            <input type="number" id="app-level" oninput="checkMatchRequirements()" required min="1" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            <input type="number" id="app-level" required min="1" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">Company Value *</label>
-                            <input type="text" id="app-value" oninput="checkMatchRequirements()" required placeholder="50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            <input type="text" id="app-value" required placeholder="50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">Weekly Donations *</label>
-                            <input type="number" id="app-donations" oninput="checkMatchRequirements()" required min="0" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            <input type="number" id="app-donations" required min="0" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                         </div>
                     </div>
 
@@ -403,7 +403,7 @@
         </div>
     </footer>
 
-    <!-- Full App Logic & Google Apps Script Sync -->
+    <!-- Full App Logic & Event Listeners -->
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2XNFK7iywr_JcpMq1Qv3ZQx3FQfWgyuR3CU9zk7o1e-CRQOsdsUtKQMUSchwRfmsJ/exec';
 
@@ -493,6 +493,47 @@
             const modal = document.getElementById('applicant-modal');
             if (show) modal.classList.remove('hidden');
             else modal.classList.add('hidden');
+        }
+
+        function openApplyModal(corp) {
+            activeCorpModalId = corp;
+            document.getElementById('modal-corp-name').textContent = corp.name;
+            document.getElementById('modal-corp-id').textContent = `ID: ${corp.corpId}`;
+            document.getElementById('req-level').textContent = corp.minLevel;
+            document.getElementById('req-value').textContent = corp.minValue;
+            document.getElementById('req-donations').textContent = corp.minDonations;
+
+            document.getElementById('apply-modal').classList.remove('hidden');
+            checkMatchRequirements();
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+            activeCorpModalId = null;
+        }
+
+        function checkMatchRequirements() {
+            if (!activeCorpModalId) return;
+            const userLevel = parseInt(document.getElementById('app-level').value) || 0;
+            const userDonations = parseInt(document.getElementById('app-donations').value) || 0;
+            const statusDiv = document.getElementById('match-status');
+
+            const minLevel = Number(activeCorpModalId.minLevel);
+            const minDonations = Number(activeCorpModalId.minDonations);
+
+            if (userLevel === 0 && userDonations === 0) {
+                statusDiv.classList.add('hidden');
+                return;
+            }
+
+            statusDiv.classList.remove('hidden');
+            if (userLevel >= minLevel && userDonations >= minDonations) {
+                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-blue-950/65 text-blue-200 border border-blue-800";
+                statusDiv.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-yellow-400"></i> You meet all corporation stat requirements!`;
+            } else {
+                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-red-950/65 text-red-200 border border-red-800";
+                statusDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1 text-yellow-400"></i> You are below one or more requirements, but leaders can still review your application.`;
+            }
         }
 
         function getRemainingTimeFormatted(createdAt) {
@@ -701,139 +742,6 @@
             });
         }
 
-        async function handlePostApplicant(e) {
-            e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Publishing Profile...';
-            submitBtn.disabled = true;
-
-            const payload = {
-                type: 'applicant',
-                applicantName: document.getElementById('applicant-name').value,
-                playerId: document.getElementById('applicant-id').value,
-                level: parseInt(document.getElementById('applicant-level').value),
-                value: document.getElementById('applicant-value').value,
-                donations: parseInt(document.getElementById('applicant-donations').value),
-                bio: document.getElementById('applicant-bio').value,
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-                showToast('Player profile posted successfully!');
-                document.getElementById('applicant-form').reset();
-                toggleApplicantModal(false);
-                switchSection('applicants');
-                fetchListings();
-            } catch (err) {
-                console.error(err);
-                showToast('Failed to post profile.', 'error');
-            } finally {
-                submitBtn.textContent = 'Publish Player Profile (3-Day Expiry)';
-                submitBtn.disabled = false;
-            }
-        }
-
-        async function handlePostCorp(e) {
-            e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Publishing to Database...';
-            submitBtn.disabled = true;
-
-            const payload = {
-                type: 'listing',
-                corpName: document.getElementById('post-name').value,
-                corpId: document.getElementById('post-id').value,
-                memberCount: parseInt(document.getElementById('post-members').value),
-                seekingCount: parseInt(document.getElementById('post-seeking').value),
-                minLevel: parseInt(document.getElementById('post-min-level').value),
-                minCompanyValue: document.getElementById('post-min-value').value,
-                minDonations: parseInt(document.getElementById('post-min-donations').value),
-                description: document.getElementById('post-description').value,
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-                showToast('Corporation listed successfully!');
-                document.getElementById('post-corp-form').reset();
-                switchCorpSubTab('browse');
-                fetchListings();
-            } catch (err) {
-                console.error(err);
-                showToast('Failed to publish listing.', 'error');
-            } finally {
-                submitBtn.textContent = 'Publish Corporation Listing';
-                submitBtn.disabled = false;
-            }
-        }
-
-        function openApplyModal(corp) {
-            activeCorpModalId = corp;
-            document.getElementById('modal-corp-name').textContent = corp.name;
-            document.getElementById('modal-corp-id').textContent = `ID: ${corp.corpId}`;
-            document.getElementById('req-level').textContent = corp.minLevel;
-            document.getElementById('req-value').textContent = corp.minValue;
-            document.getElementById('req-donations').textContent = corp.minDonations;
-
-            document.getElementById('apply-modal').classList.remove('hidden');
-            checkMatchRequirements();
-        }
-
-        function closeApplyModal() {
-            document.getElementById('apply-modal').classList.add('hidden');
-            activeCorpModalId = null;
-        }
-
-        function checkMatchRequirements() {
-            if (!activeCorpModalId) return;
-            const userLevel = parseInt(document.getElementById('app-level').value) || 0;
-            const userDonations = parseInt(document.getElementById('app-donations').value) || 0;
-            const statusDiv = document.getElementById('match-status');
-
-            const minLevel = Number(activeCorpModalId.minLevel);
-            const minDonations = Number(activeCorpModalId.minDonations);
-
-            if (userLevel === 0 && userDonations === 0) {
-                statusDiv.classList.add('hidden');
-                return;
-            }
-
-            statusDiv.classList.remove('hidden');
-            if (userLevel >= minLevel && userDonations >= minDonations) {
-                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-blue-950/65 text-blue-200 border border-blue-800";
-                statusDiv.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-yellow-400"></i> You meet all corporation stat requirements!`;
-            } else {
-                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-red-950/65 text-red-200 border border-red-800";
-                statusDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1 text-yellow-400"></i> You are below one or more requirements, but leaders can still review your application.`;
-            }
-        }
-
-        function submitApplication(e) {
-            e.preventDefault();
-            const playerId = document.getElementById('app-player-id').value;
-            navigator.clipboard.writeText(playerId).catch(() => {});
-
-            closeApplyModal();
-            showToast('Application details saved & Player ID copied! Send invite request in-game.');
-            document.getElementById('apply-form').reset();
-        }
-
-        function resetFilters() {
-            document.getElementById('search-input').value = '';
-            document.getElementById('filter-level').value = '0';
-            document.getElementById('filter-sort').value = 'newest';
-            renderListings();
-        }
-
         function showToast(msg, type = 'success') {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toast-icon');
@@ -862,7 +770,134 @@
                 .replace(/'/g, "&#039;");
         }
 
-        fetchListings();
+        // Attach Event Listeners securely once the DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('nav-sec-applicants').addEventListener('click', () => switchSection('applicants'));
+            document.getElementById('nav-sec-corps').addEventListener('click', () => switchSection('corps'));
+            document.getElementById('logo-home-btn').addEventListener('click', () => switchSection('applicants'));
+
+            document.getElementById('corp-tab-browse-btn').addEventListener('click', () => switchCorpSubTab('browse'));
+            document.getElementById('corp-tab-post-btn').addEventListener('click', () => switchCorpSubTab('post'));
+
+            document.getElementById('open-applicant-modal-btn').addEventListener('click', () => toggleApplicantModal(true));
+            document.getElementById('empty-open-applicant-modal-btn').addEventListener('click', () => toggleApplicantModal(true));
+            document.getElementById('close-applicant-modal-btn').addEventListener('click', () => toggleApplicantModal(false));
+            document.getElementById('close-apply-modal-btn').addEventListener('click', closeApplyModal);
+
+            document.getElementById('empty-post-corp-btn').addEventListener('click', () => switchCorpSubTab('post'));
+
+            const resetBtn = document.getElementById('reset-filters-btn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    document.getElementById('search-input').value = '';
+                    document.getElementById('filter-level').value = '0';
+                    document.getElementById('filter-sort').value = 'newest';
+                    renderListings();
+                });
+            }
+
+            // Search inputs live update listeners
+            const appSearch = document.getElementById('app-search-input');
+            if (appSearch) appSearch.addEventListener('input', renderApplicants);
+
+            const corpSearch = document.getElementById('search-input');
+            if (corpSearch) corpSearch.addEventListener('input', renderListings);
+
+            const filterLevel = document.getElementById('filter-level');
+            if (filterLevel) filterLevel.addEventListener('change', renderListings);
+
+            const filterSort = document.getElementById('filter-sort');
+            if (filterSort) filterSort.addEventListener('change', renderListings);
+
+            // Form submissions
+            document.getElementById('applicant-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Publishing Profile...';
+                submitBtn.disabled = true;
+
+                const payload = {
+                    type: 'applicant',
+                    applicantName: document.getElementById('applicant-name').value,
+                    playerId: document.getElementById('applicant-id').value,
+                    level: parseInt(document.getElementById('applicant-level').value),
+                    value: document.getElementById('applicant-value').value,
+                    donations: parseInt(document.getElementById('applicant-donations').value),
+                    bio: document.getElementById('applicant-bio').value,
+                    createdAt: new Date().toISOString()
+                };
+
+                try {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                    showToast('Player profile posted successfully!');
+                    document.getElementById('applicant-form').reset();
+                    toggleApplicantModal(false);
+                    switchSection('applicants');
+                    fetchListings();
+                } catch (err) {
+                    console.error(err);
+                    showToast('Failed to post profile.', 'error');
+                } finally {
+                    submitBtn.textContent = 'Publish Player Profile (3-Day Expiry)';
+                    submitBtn.disabled = false;
+                }
+            });
+
+            document.getElementById('post-corp-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Publishing to Database...';
+                submitBtn.disabled = true;
+
+                const payload = {
+                    type: 'listing',
+                    corpName: document.getElementById('post-name').value,
+                    corpId: document.getElementById('post-id').value,
+                    memberCount: parseInt(document.getElementById('post-members').value),
+                    seekingCount: parseInt(document.getElementById('post-seeking').value),
+                    minLevel: parseInt(document.getElementById('post-min-level').value),
+                    minCompanyValue: document.getElementById('post-min-value').value,
+                    minDonations: parseInt(document.getElementById('post-min-donations').value),
+                    description: document.getElementById('post-description').value,
+                    createdAt: new Date().toISOString()
+                };
+
+                try {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                    showToast('Corporation listed successfully!');
+                    document.getElementById('post-corp-form').reset();
+                    switchCorpSubTab('browse');
+                    fetchListings();
+                } catch (err) {
+                    console.error(err);
+                    showToast('Failed to publish listing.', 'error');
+                } finally {
+                    submitBtn.textContent = 'Publish Corporation Listing';
+                    submitBtn.disabled = false;
+                }
+            });
+
+            document.getElementById('apply-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const playerId = document.getElementById('app-player-id').value;
+                navigator.clipboard.writeText(playerId).catch(() => {});
+
+                closeApplyModal();
+                showToast('Application details saved & Player ID copied! Send invite request in-game.');
+                document.getElementById('apply-form').reset();
+            });
+
+            // Initial load
+            fetchListings();
+        });
     </script>
 </body>
 </html>
