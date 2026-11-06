@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2XNFK7iywr_JcpMq1Qv3ZQx3FQfWgyuR3CU9zk7o1e-CRQOsdsUtKQMUSchwRfmsJ/exec';
 
 // Handle publishing a new corporation listing
 document.getElementById('corpForm').addEventListener('submit', function(e) {
