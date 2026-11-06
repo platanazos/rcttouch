@@ -69,11 +69,11 @@
             <nav class="flex items-center space-x-2 sm:space-x-3">
                 <button id="nav-sec-applicants" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
                     <i class="fa-solid fa-users-viewfinder text-yellow-300"></i>
-                    <span>Player / Applicant Board</span>
+                    <span>Players</span>
                 </button>
                 <button id="nav-sec-corps" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                     <i class="fa-solid fa-building text-red-500"></i>
-                    <span>Corp Directory & Ads</span>
+                    <span>Corporations</span>
                 </button>
             </nav>
         </div>
@@ -82,7 +82,7 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- ================= SECTION 1: APPLICANT BOARD (DEFAULT) ================= -->
+        <!-- ================= SECTION 1: PLAYERS BOARD (DEFAULT) ================= -->
         <div id="section-applicants" class="space-y-6">
             <section class="relative rounded-2xl overflow-hidden mb-8 p-6 md:p-8 bg-slate-900 border border-slate-800 hero-pattern shadow-2xl">
                 <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -91,13 +91,13 @@
                         <i class="fa-solid fa-id-card text-yellow-400"></i> Looking for a Corp
                     </div>
                     <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-                        Player Availability Board
+                        Find a Player!
                     </h1>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
                         CEOs can browse active players looking for a home, check their stats, and invite them directly! Post your own profile below.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <button id="open-applicant-modal-btn" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
+                        <button id="open-applicant-modal-btn" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all transform hover:-translate-y-0.5">
                             <i class="fa-solid fa-user-plus mr-2 text-yellow-300"></i> Post Your Player Profile
                         </button>
                     </div>
@@ -123,14 +123,14 @@
                 <i class="fa-solid fa-user-slash text-4xl text-slate-600 mb-3"></i>
                 <h3 class="text-lg font-bold text-white">No active player profiles found</h3>
                 <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Be the first player to post your info for CEOs to see!</p>
-                <button id="empty-open-applicant-modal-btn" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-all">
+                <button id="empty-open-applicant-modal-btn" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-all">
                     Post Your Player Profile
                 </button>
             </div>
         </div>
 
 
-        <!-- ================= SECTION 2: CORP DIRECTORY & ADS ================= -->
+        <!-- ================= SECTION 2: CORPORATIONS DIRECTORY & ADS ================= -->
         <div id="section-corps" class="hidden space-y-6">
             <div class="flex items-center justify-between bg-slate-900 p-4 rounded-xl border border-slate-800">
                 <div>
@@ -302,7 +302,7 @@
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Bio / What You're Looking For</label>
                         <textarea id="applicant-bio" rows="3" placeholder="e.g. Active daily player looking for a top 50 competitive corp!" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
                     </div>
-                    <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+                    <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all">
                         Publish Player Profile (3-Day Expiry)
                     </button>
                 </form>
