@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCT Touch - Corporation Recruitment Hub</title>
+    <title>RCT Touch - Corporation & Player Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -50,29 +50,30 @@
     <!-- Top Announcement Banner -->
     <div class="bg-blue-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-md flex justify-center items-center gap-2">
         <i class="fa-solid fa-triangle-exclamation text-yellow-300 animate-pulse"></i>
-        <span><strong>Applicant Reminder:</strong> You MUST leave your current Corporation in RCT Touch before leaders can send you an invite!</span>
+        <span><strong>Notice:</strong> Applicants must leave their current Corporation before accepting an in-game invite!</span>
     </div>
 
     <!-- Main Navigation Header -->
     <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('browse')">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchSection('applicants')">
                 <!-- Top-Left Logo Image -->
                 <img src="YOUR_IMAGE_URL_HERE" alt="RCT Touch Logo" class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-blue-500/20 border border-blue-500/30">
                 <div>
                     <span class="font-display text-xl font-bold tracking-wide text-blue-400">RCT TOUCH</span>
-                    <span class="text-xs block text-slate-400 uppercase tracking-widest font-semibold">Corp Finder</span>
+                    <span class="text-xs block text-slate-400 uppercase tracking-widest font-semibold">Hub & Directory</span>
                 </div>
             </div>
 
-            <nav class="flex items-center space-x-2 sm:space-x-4">
-                <button id="nav-browse" onclick="switchTab('browse')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
-                    <i class="fa-solid fa-compass text-yellow-300"></i>
-                    <span>Browse Corps</span>
+            <!-- Section Switcher Tabs -->
+            <nav class="flex items-center space-x-2 sm:space-x-3">
+                <button id="nav-sec-applicants" onclick="switchSection('applicants')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
+                    <i class="fa-solid fa-users-viewfinder text-yellow-300"></i>
+                    <span>Player / Applicant Board</span>
                 </button>
-                <button id="nav-post" onclick="switchTab('post')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-800/60 flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle text-red-500"></i>
-                    <span>List a Corp</span>
+                <button id="nav-sec-corps" onclick="switchSection('corps')" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                    <i class="fa-solid fa-building text-red-500"></i>
+                    <span>Corp Directory & Ads</span>
                 </button>
             </nav>
         </div>
@@ -81,150 +82,240 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- HERO BANNER -->
-        <section class="relative rounded-2xl overflow-hidden mb-8 p-6 md:p-8 bg-slate-900 border border-slate-800 hero-pattern shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-10 -top-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
-                    <i class="fa-solid fa-fire text-yellow-400"></i> Corp Recruitment Portal
+        <!-- ================= SECTION 1: APPLICANT BOARD (DEFAULT) ================= -->
+        <div id="section-applicants" class="space-y-6">
+            <!-- Hero Banner -->
+            <section class="relative rounded-2xl overflow-hidden mb-8 p-6 md:p-8 bg-slate-900 border border-slate-800 hero-pattern shadow-2xl">
+                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-id-card text-yellow-400"></i> Looking for a Corp
+                    </div>
+                    <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
+                        Player Availability Board
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        CEOs can browse active players looking for a home, check their stats, and invite them directly! Post your own profile below.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="toggleApplicantModal(true)" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-user-plus mr-2 text-yellow-300"></i> Post Your Player Profile
+                        </button>
+                    </div>
                 </div>
-                <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-                    Find a Corp Today!
-                </h1>
-                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                    A central place to find an active corp or to find new members for your corp!
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="switchTab('post')" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all transform hover:-translate-y-0.5">
-                        <i class="fa-solid fa-bullhorn mr-2"></i> Post Your Corp Listing
-                    </button>
-                    <button onclick="switchTab('browse')" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-slate-950 font-bold text-sm shadow-lg shadow-yellow-500/20 transition-all">
-                        <i class="fa-solid fa-magnifying-glass mr-2"></i> Find a Corp
-                    </button>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- TAB 1: BROWSE CORPORATIONS -->
-        <div id="tab-browse" class="space-y-6">
+            <!-- Search / Filter Bar for Applicants -->
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full md:w-96">
                     <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                    <input type="text" id="search-input" oninput="renderListings()" placeholder="Search by Corp Name or Corp ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                    <input type="text" id="app-search-input" oninput="renderApplicants()" placeholder="Search by Player ID or Name..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                 </div>
-                
-                <div class="flex flex-wrap sm:flex-nowrap gap-3 w-full md:w-auto items-center">
-                    <div class="flex items-center gap-2 w-1/2 sm:w-auto">
-                        <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Min Level:</span>
-                        <select id="filter-level" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
-                            <option value="0">All Levels</option>
-                            <option value="10">Level 10+</option>
-                            <option value="25">Level 25+</option>
-                            <option value="50">Level 50+</option>
-                            <option value="75">Level 75+</option>
-                            <option value="100">Level 100+</option>
-                        </select>
-                    </div>
-
-                    <div class="flex items-center gap-2 w-1/2 sm:w-auto">
-                        <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Sort By:</span>
-                        <select id="filter-sort" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
-                            <option value="newest">Newest First</option>
-                            <option value="expiring">Expiring Soonest</option>
-                            <option value="seeking">Most Spots Open</option>
-                        </select>
-                    </div>
-
-                    <button onclick="resetFilters()" class="text-xs px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
-                        Reset
-                    </button>
+                <div class="text-xs text-slate-400">
+                    Showing active player profiles looking for invitations.
                 </div>
             </div>
 
-            <!-- Cards Grid -->
-            <div id="corp-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <!-- Applicant Cards Grid -->
+            <div id="applicant-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-            <!-- Empty State -->
-            <div id="no-results" class="hidden text-center py-12 bg-slate-900/50 rounded-2xl border border-dashed border-slate-800">
-                <i class="fa-solid fa-ghost text-4xl text-slate-600 mb-3"></i>
-                <h3 class="text-lg font-bold text-white">No active corporations found</h3>
-                <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Try adjusting your filters or search terms, or be the first to list a new corporation!</p>
-                <button onclick="switchTab('post')" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-all">
-                    Post a Corp Listing
+            <!-- Empty State for Applicants -->
+            <div id="applicant-no-results" class="hidden text-center py-12 bg-slate-900/50 rounded-2xl border border-dashed border-slate-800">
+                <i class="fa-solid fa-user-slash text-4xl text-slate-600 mb-3"></i>
+                <h3 class="text-lg font-bold text-white">No active player profiles found</h3>
+                <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Be the first player to post your info for CEOs to see!</p>
+                <button onclick="toggleApplicantModal(true)" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-all">
+                    Post Your Player Profile
                 </button>
             </div>
         </div>
 
-        <!-- TAB 2: POST CORPORATION FORM -->
-        <div id="tab-post" class="hidden max-w-2xl mx-auto">
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xl">
-                <div class="mb-6 border-b border-slate-800 pb-4">
-                    <h2 class="font-display text-2xl font-bold text-white flex items-center gap-3">
-                        <i class="fa-solid fa-shield-halved text-red-500"></i> List Your Corporation
+
+        <!-- ================= SECTION 2: CORP DIRECTORY & ADS ================= -->
+        <div id="section-corps" class="hidden space-y-6">
+            <!-- Sub-Navigation for Corps (Browse vs Post) -->
+            <div class="flex items-center justify-between bg-slate-900 p-4 rounded-xl border border-slate-800">
+                <div>
+                    <h2 class="font-display text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-building text-red-500"></i> Corporation Advertising Portal
                     </h2>
-                    <p class="text-slate-400 text-xs sm:text-sm mt-1">
-                        Listings automatically expire after <span class="text-yellow-400 font-semibold">3 days (72 hours)</span> to keep the directory active.
-                    </p>
+                    <p class="text-xs text-slate-400 mt-0.5">Find active corps or post your corp listing for members.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button id="corp-tab-browse-btn" onclick="switchCorpSubTab('browse')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">Browse Ads</button>
+                    <button id="corp-tab-post-btn" onclick="switchCorpSubTab('post')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition-all">List a Corp</button>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 1: BROWSE CORPS -->
+            <div id="corp-sub-browse" class="space-y-6">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="relative w-full md:w-96">
+                        <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                        <input type="text" id="search-input" oninput="renderListings()" placeholder="Search by Corp Name or Corp ID..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    
+                    <div class="flex flex-wrap sm:flex-nowrap gap-3 w-full md:w-auto items-center">
+                        <div class="flex items-center gap-2 w-1/2 sm:w-auto">
+                            <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Min Level:</span>
+                            <select id="filter-level" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
+                                <option value="0">All Levels</option>
+                                <option value="10">Level 10+</option>
+                                <option value="25">Level 25+</option>
+                                <option value="50">Level 50+</option>
+                                <option value="75">Level 75+</option>
+                                <option value="100">Level 100+</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center gap-2 w-1/2 sm:w-auto">
+                            <span class="text-xs text-slate-400 font-medium whitespace-nowrap">Sort By:</span>
+                            <select id="filter-sort" onchange="renderListings()" class="bg-slate-950 border border-slate-800 rounded-lg text-xs py-2 px-3 text-white focus:outline-none focus:border-blue-500 w-full">
+                                <option value="newest">Newest First</option>
+                                <option value="expiring">Expiring Soonest</option>
+                                <option value="seeking">Most Spots Open</option>
+                            </select>
+                        </div>
+
+                        <button onclick="resetFilters()" class="text-xs px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+                            Reset
+                        </button>
+                    </div>
                 </div>
 
-                <form id="post-corp-form" onsubmit="handlePostCorp(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corporation Name *</label>
-                            <input type="text" id="post-name" required placeholder="e.g. Apex Coasters" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">In-Game Corp ID *</label>
-                            <input type="text" id="post-id" required placeholder="e.g. #RCT-88902" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                        </div>
-                    </div>
+                <!-- Cards Grid for Corps -->
+                <div id="corp-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Current Members (Max 40)</label>
-                            <input type="number" id="post-members" min="1" max="40" value="15" required class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Players Seeking *</label>
-                            <input type="number" id="post-seeking" min="1" max="39" value="5" required class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                        </div>
-                    </div>
-
-                    <div class="border-t border-slate-800 pt-4">
-                        <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3">Applicant Requirements</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Min Level</label>
-                                <input type="number" id="post-min-level" min="1" value="25" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Min Company Value</label>
-                                <input type="text" id="post-min-value" value="50M" placeholder="e.g. 50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Min Donations</label>
-                                <input type="number" id="post-min-donations" min="0" value="50" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-t border-slate-800 pt-4">
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corp Description & Special Rules</label>
-                        <textarea id="post-description" rows="3" placeholder="e.g. Friendly active corp! Request only Epic cards on weekends." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all">
-                        Publish Corporation Listing
+                <!-- Empty State for Corps -->
+                <div id="no-results" class="hidden text-center py-12 bg-slate-900/50 rounded-2xl border border-dashed border-slate-800">
+                    <i class="fa-solid fa-ghost text-4xl text-slate-600 mb-3"></i>
+                    <h3 class="text-lg font-bold text-white">No active corporations found</h3>
+                    <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1">Try adjusting your filters or be the first to list a new corporation!</p>
+                    <button onclick="switchCorpSubTab('post')" class="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-all">
+                        Post a Corp Listing
                     </button>
-                </form>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 2: POST CORP FORM -->
+            <div id="corp-sub-post" class="hidden max-w-2xl mx-auto">
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xl">
+                    <div class="mb-6 border-b border-slate-800 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-white flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved text-red-500"></i> List Your Corporation
+                        </h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-1">
+                            Listings automatically expire after <span class="text-yellow-400 font-semibold">3 days (72 hours)</span> to keep the directory active.
+                        </p>
+                    </div>
+
+                    <form id="post-corp-form" onsubmit="handlePostCorp(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corporation Name *</label>
+                                <input type="text" id="post-name" required placeholder="e.g. Apex Coasters" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">In-Game Corp ID *</label>
+                                <input type="text" id="post-id" required placeholder="e.g. #RCT-88902" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Current Members (Max 40)</label>
+                                <input type="number" id="post-members" min="1" max="40" value="15" required class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Players Seeking *</label>
+                                <input type="number" id="post-seeking" min="1" max="39" value="5" required class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800 pt-4">
+                            <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3">Applicant Requirements</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-1">Min Level</label>
+                                    <input type="number" id="post-min-level" min="1" value="25" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-1">Min Company Value</label>
+                                    <input type="text" id="post-min-value" value="50M" placeholder="e.g. 50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-1">Min Donations</label>
+                                    <input type="number" id="post-min-donations" min="0" value="50" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800 pt-4">
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corp Description & Special Rules</label>
+                            <textarea id="post-description" rows="3" placeholder="e.g. Friendly active corp! Request only Epic cards on weekends." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all">
+                            Publish Corporation Listing
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- APPLICATION MODAL -->
+    <!-- ================= MODAL: POST APPLICANT PROFILE ================= -->
+    <div id="applicant-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
+            <div class="p-5 border-b border-slate-800 flex justify-between items-center sticky top-0 bg-slate-900 z-10">
+                <div>
+                    <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider">Player Board</span>
+                    <h3 class="font-display text-xl font-bold text-white">Post Your Player Profile</h3>
+                </div>
+                <button onclick="toggleApplicantModal(false)" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5">
+                <form id="applicant-form" onsubmit="handlePostApplicant(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your In-Game Name *</label>
+                        <input type="text" id="applicant-name" required placeholder="e.g. CoasterKing99" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your RCT Player ID *</label>
+                        <input type="text" id="applicant-id" required placeholder="Found in your RCT Profile settings" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Level *</label>
+                            <input type="number" id="applicant-level" required min="1" value="30" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Company Value *</label>
+                            <input type="text" id="applicant-value" required placeholder="50M" value="50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Weekly Don. *</label>
+                            <input type="number" id="applicant-donations" required min="0" value="75" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Bio / What You're Looking For</label>
+                        <textarea id="applicant-bio" rows="3" placeholder="e.g. Active daily player looking for a top 50 competitive corp!" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+                        Publish Player Profile (3-Day Expiry)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= MODAL: APPLY TO CORP (FROM CORP DIRECTORY) ================= -->
     <div id="apply-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
             <div class="p-5 border-b border-slate-800 flex justify-between items-center sticky top-0 bg-slate-900 z-10">
@@ -301,132 +392,4 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3">
-        <i id="toast-icon" class="fa-solid fa-circle-check text-yellow-400 text-lg"></i>
-        <span id="toast-msg" class="text-sm font-medium">Action completed successfully!</span>
-    </div>
-
-    <footer class="mt-auto border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div>
-                <span class="font-bold text-slate-400">RollerCoaster Tycoon Touch Corp Finder</span> — Fan-made recruitment directory.
-            </div>
-            <div class="flex items-center gap-4 text-slate-400">
-                <span class="flex items-center gap-1"><i class="fa-solid fa-circle text-[8px] text-yellow-400"></i> Listings auto-expire after 3 days</span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Full App Logic & Google Apps Script Sync -->
-    <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2XNFK7iywr_JcpMq1Qv3ZQx3FQfWgyuR3CU9zk7o1e-CRQOsdsUtKQMUSchwRfmsJ/exec';
-
-        let activeCorpModalId = null;
-        let cachedListings = [];
-
-        async function fetchListings() {
-            try {
-                const response = await fetch(SCRIPT_URL);
-                const data = await response.json();
-                if (Array.isArray(data)) {
-                    cachedListings = data.map(item => ({
-                        ...item,
-                        createdAt: item.createdAt ? new Date(item.createdAt).getTime() : Date.now(),
-                        name: item.name || item.corpName || 'Unnamed Corp',
-                        corpId: item.corpId || '#00000',
-                        members: item.memberCount || item.members || 15,
-                        seeking: item.seekingCount || item.seeking || 5,
-                        minLevel: item.minLevel || 0,
-                        minValue: item.minCompanyValue || item.minValue || '0',
-                        minDonations: item.minDonations || 0,
-                        rules: item.description || item.rules || ''
-                    }));
-                }
-            } catch (err) {
-                console.error("Error fetching from Database:", err);
-            }
-            renderListings();
-        }
-
-        function switchTab(tabName) {
-            ['browse', 'post'].forEach(t => {
-                document.getElementById(`tab-${t}`).classList.add('hidden');
-                const btn = document.getElementById(`nav-${t}`);
-                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
-            });
-
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`nav-${tabName}`);
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-            activeBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
-
-            if (tabName === 'browse') fetchListings();
-        }
-
-        function getRemainingTimeFormatted(createdAt) {
-            const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-            const expiresAt = createdAt + THREE_DAYS_MS;
-            const diff = expiresAt - Date.now();
-
-            if (diff <= 0) return null;
-
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-            if (hours >= 24) {
-                const days = Math.floor(hours / 24);
-                const remHours = hours % 24;
-                return `${days}d ${remHours}h left`;
-            }
-            return `${hours}h ${mins}m left`;
-        }
-
-        function renderListings() {
-            const grid = document.getElementById('corp-cards-grid');
-            const noResults = document.getElementById('no-results');
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-            const minLevelFilter = parseInt(document.getElementById('filter-level').value) || 0;
-            const sortBy = document.getElementById('filter-sort').value;
-
-            let listings = [...cachedListings];
-            const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-
-            listings = listings.filter(item => (Date.now() - item.createdAt) < THREE_DAYS_MS);
-
-            listings = listings.filter(corp => {
-                const name = corp.name || '';
-                const id = corp.corpId || '';
-                const matchesSearch = name.toLowerCase().includes(searchTerm) || id.toLowerCase().includes(searchTerm);
-                const matchesLevel = Number(corp.minLevel) >= minLevelFilter;
-                return matchesSearch && matchesLevel;
-            });
-
-            if (sortBy === 'newest') {
-                listings.sort((a, b) => b.createdAt - a.createdAt);
-            } else if (sortBy === 'expiring') {
-                listings.sort((a, b) => a.createdAt - b.createdAt);
-            } else if (sortBy === 'seeking') {
-                listings.sort((a, b) => Number(b.seeking) - Number(a.seeking));
-            }
-
-            grid.innerHTML = '';
-
-            if (listings.length === 0) {
-                noResults.classList.remove('hidden');
-                return;
-            } else {
-                noResults.classList.add('hidden');
-            }
-
-            listings.forEach(corp => {
-                const timeLeft = getRemainingTimeFormatted(corp.createdAt);
-                if (!timeLeft) return;
-
-                const card = document.createElement('div');
-                card.className = "bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 flex flex-col justify-between shadow-xl transition-all duration-200 relative group hover:-translate-y-1";
-
-                const corpName = escapeHtml(corp.name);
-                const corpId = escapeHtml(corp.corpId);
-                const members = corp.members;
-                const minLevel =
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-
