@@ -29,9 +29,6 @@
             background-color: #0B0F19;
             color: #F8FAFC;
         }
-        .coaster-gradient {
-            background: linear-gradient(135deg, #1D4ED8 0%, #DC2626 50%, #FACC15 100%);
-        }
         .hero-pattern {
             background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
             background-size: 20px 20px;
@@ -50,9 +47,9 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans antialiased custom-scrollbar">
 
-    <!-- Top Announcement Banner -->
-    <div class="bg-gradient-to-r from-blue-700 via-red-600 to-yellow-500 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-md flex justify-center items-center gap-2">
-        <i class="fa-solid fa-triangle-exclamation text-yellow-200 animate-pulse"></i>
+    <!-- Top Announcement Banner (Solid Blue) -->
+    <div class="bg-blue-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-md flex justify-center items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-yellow-300 animate-pulse"></i>
         <span><strong>Applicant Reminder:</strong> You MUST leave your current Corporation in RCT Touch before leaders can send you an invite!</span>
     </div>
 
@@ -63,17 +60,17 @@
                 <!-- Top-Left Logo Image -->
                 <img src="YOUR_IMAGE_URL_HERE" alt="RCT Touch Logo" class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-blue-500/20 border border-blue-500/30">
                 <div>
-                    <span class="font-display text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-red-400 to-yellow-400">RCT TOUCH</span>
+                    <span class="font-display text-xl font-bold tracking-wide text-blue-400">RCT TOUCH</span>
                     <span class="text-xs block text-slate-400 uppercase tracking-widest font-semibold">Corp Finder</span>
                 </div>
             </div>
 
             <nav class="flex items-center space-x-2 sm:space-x-4">
-                <button id="nav-browse" onclick="switchTab('browse')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-slate-800 text-white border border-slate-700">
-                    <i class="fa-solid fa-compass text-yellow-400"></i>
+                <button id="nav-browse" onclick="switchTab('browse')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-md">
+                    <i class="fa-solid fa-compass text-yellow-300"></i>
                     <span>Browse Corps</span>
                 </button>
-                <button id="nav-post" onclick="switchTab('post')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60 flex items-center gap-2">
+                <button id="nav-post" onclick="switchTab('post')" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-800/60 flex items-center gap-2">
                     <i class="fa-solid fa-plus-circle text-red-500"></i>
                     <span>List a Corp</span>
                 </button>
@@ -90,7 +87,7 @@
             <div class="absolute -left-10 -top-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider mb-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
                     <i class="fa-solid fa-fire text-yellow-400"></i> Corp Recruitment Portal
                 </div>
                 <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
@@ -100,11 +97,13 @@
                     A central place to find an active corp or to find new members for your corp!
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <button onclick="switchTab('post')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-yellow-500 hover:from-red-700 hover:to-yellow-600 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all transform hover:-translate-y-0.5">
+                    <!-- Red Action Button -->
+                    <button onclick="switchTab('post')" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all transform hover:-translate-y-0.5">
                         <i class="fa-solid fa-bullhorn mr-2"></i> Post Your Corp Listing
                     </button>
-                    <button onclick="switchTab('browse')" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-semibold text-sm transition-all">
-                        <i class="fa-solid fa-magnifying-glass mr-2 text-blue-400"></i> Find a Corp
+                    <!-- Yellow Accent Button -->
+                    <button onclick="switchTab('browse')" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-slate-950 font-bold text-sm shadow-lg shadow-yellow-500/20 transition-all">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i> Find a Corp
                     </button>
                 </div>
             </div>
@@ -218,7 +217,8 @@
                         <textarea id="post-description" rows="3" placeholder="e.g. Friendly active corp! Request only Epic cards on weekends." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 hover:from-red-700 hover:to-yellow-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+                    <!-- Red Submit Button -->
+                    <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all">
                         Publish Corporation Listing
                     </button>
                 </form>
@@ -242,7 +242,7 @@
             </div>
 
             <div class="p-5 space-y-4">
-                <div class="bg-gradient-to-r from-red-950/60 to-blue-950/60 border border-red-500/50 rounded-xl p-4 flex items-start gap-3">
+                <div class="bg-red-950/60 border border-red-500/50 rounded-xl p-4 flex items-start gap-3">
                     <i class="fa-solid fa-triangle-exclamation text-yellow-400 text-xl mt-0.5 animate-bounce"></i>
                     <div>
                         <h4 class="text-xs font-bold text-red-300 uppercase tracking-wider">Mandatory Requirement</h4>
@@ -294,7 +294,8 @@
                     <div id="match-status" class="hidden p-2 rounded-lg text-xs font-semibold text-center"></div>
 
                     <div class="pt-2">
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+                        <!-- Yellow Action Button -->
+                        <button type="submit" class="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-yellow-500/20 transition-all">
                             Submit Invite Request
                         </button>
                     </div>
@@ -353,14 +354,14 @@
             ['browse', 'post'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 const btn = document.getElementById(`nav-${t}`);
-                btn.classList.remove('bg-slate-800', 'text-white', 'border', 'border-slate-700');
-                btn.classList.add('text-slate-400');
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
             });
 
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`nav-${tabName}`);
-            activeBtn.classList.add('bg-slate-800', 'text-white', 'border', 'border-slate-700');
-            activeBtn.classList.remove('text-slate-400');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+            activeBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
 
             if (tabName === 'browse') fetchListings();
         }
@@ -425,201 +426,9 @@
                 if (!timeLeft) return;
 
                 const card = document.createElement('div');
-                card.className = "bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 flex flex-col justify-between shadow-xl transition-all duration-200 relative group hover:-translate-y-1";
+                card.className = "bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 flex flex-col justify-between shadow-xl transition-all duration-200 relative group hover:-translate-y-1";
 
                 const corpName = escapeHtml(corp.name || corp.corpName);
                 const corpId = escapeHtml(corp.corpId);
                 const members = corp.members;
                 const seeking = corp.seeking;
-                const minLevel = corp.minLevel;
-                const minValue = escapeHtml(String(corp.minValue));
-                const minDonations = corp.minDonations;
-                const rules = escapeHtml(corp.rules);
-
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div>
-                                <h3 class="font-display text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">${corpName}</h3>
-                                <span class="font-mono text-xs text-yellow-400/90 font-semibold">${corpId}</span>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-clock text-yellow-400"></i> ${timeLeft}
-                            </span>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2 mb-4 bg-slate-950 p-3 rounded-xl border border-slate-800/80">
-                            <div class="flex items-center gap-2">
-                                <div class="w-7 h-7 rounded-lg bg-blue-600/10 text-blue-400 flex items-center justify-center text-xs">
-                                    <i class="fa-solid fa-users"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-[10px] text-slate-500 uppercase">Capacity</span>
-                                    <span class="text-xs font-bold text-white">${members}/40</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-7 h-7 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xs">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-[10px] text-slate-500 uppercase">Min Requirements</span>
-                                    <span class="text-xs font-bold text-yellow-400">Lvl ${minLevel}+ | $${minValue}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-1.5 mb-4 text-xs">
-                            <div class="text-slate-400 font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5 mb-1">
-                                <i class="fa-solid fa-bullhorn text-red-500"></i> Corp Rules
-                            </div>
-                            <p class="text-xs text-slate-300 line-clamp-3 bg-slate-950/50 p-3 rounded-xl border border-slate-800 italic">
-                                "${rules || 'No special rules provided.'}"
-                            </p>
-                        </div>
-                    </div>
-
-                    <button onclick='openApplyModal(${JSON.stringify(corp)})' class="w-full py-2.5 bg-gradient-to-r from-blue-600 via-red-600 to-yellow-500 hover:from-blue-700 hover:to-yellow-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane text-yellow-200"></i> Apply / Request Invite
-                    </button>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        async function handlePostCorp(e) {
-            e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Publishing to Database...';
-            submitBtn.disabled = true;
-
-            const payload = {
-                type: 'listing',
-                corpName: document.getElementById('post-name').value,
-                corpId: document.getElementById('post-id').value,
-                memberCount: parseInt(document.getElementById('post-members').value),
-                seekingCount: parseInt(document.getElementById('post-seeking').value),
-                minLevel: parseInt(document.getElementById('post-min-level').value),
-                minCompanyValue: document.getElementById('post-min-value').value,
-                minDonations: parseInt(document.getElementById('post-min-donations').value),
-                description: document.getElementById('post-description').value,
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-                showToast('Corporation listed successfully!');
-                document.getElementById('post-corp-form').reset();
-                switchTab('browse');
-                fetchListings();
-            } catch (err) {
-                console.error(err);
-                showToast('Failed to publish listing.', 'error');
-            } finally {
-                submitBtn.textContent = 'Publish Corporation Listing';
-                submitBtn.disabled = false;
-            }
-        }
-
-        function openApplyModal(corp) {
-            activeCorpModalId = corp;
-            document.getElementById('modal-corp-name').textContent = corp.name || corp.corpName;
-            document.getElementById('modal-corp-id').textContent = `ID: ${corp.corpId}`;
-            document.getElementById('req-level').textContent = corp.minLevel;
-            document.getElementById('req-value').textContent = corp.minValue || corp.minCompanyValue;
-            document.getElementById('req-donations').textContent = corp.minDonations;
-
-            document.getElementById('apply-modal').classList.remove('hidden');
-            checkMatchRequirements();
-        }
-
-        function closeApplyModal() {
-            document.getElementById('apply-modal').classList.add('hidden');
-            activeCorpModalId = null;
-        }
-
-        function checkMatchRequirements() {
-            if (!activeCorpModalId) return;
-            const userLevel = parseInt(document.getElementById('app-level').value) || 0;
-            const userDonations = parseInt(document.getElementById('app-donations').value) || 0;
-            const statusDiv = document.getElementById('match-status');
-
-            const minLevel = Number(activeCorpModalId.minLevel);
-            const minDonations = Number(activeCorpModalId.minDonations);
-
-            if (userLevel === 0 && userDonations === 0) {
-                statusDiv.classList.add('hidden');
-                return;
-            }
-
-            statusDiv.classList.remove('hidden');
-            if (userLevel >= minLevel && userDonations >= minDonations) {
-                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-blue-950/60 text-blue-300 border border-blue-800";
-                statusDiv.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-yellow-400"></i> You meet all corporation stat requirements!`;
-            } else {
-                statusDiv.className = "p-2 rounded-lg text-xs font-semibold text-center bg-red-950/60 text-red-300 border border-red-800";
-                statusDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1 text-yellow-400"></i> You are below one or more requirements, but leaders can still review your application.`;
-            }
-        }
-
-        function submitApplication(e) {
-            e.preventDefault();
-            const app = {
-                corpName: activeCorpModalId.name || activeCorpModalId.corpName,
-                corpId: activeCorpModalId.corpId,
-                playerId: document.getElementById('app-player-id').value,
-                level: document.getElementById('app-level').value,
-                value: document.getElementById('app-value').value,
-                donations: document.getElementById('app-donations').value
-            };
-
-            navigator.clipboard.writeText(app.playerId).catch(() => {});
-
-            closeApplyModal();
-            showToast('Application details saved! Please send your invite request in-game.');
-            document.getElementById('apply-form').reset();
-        }
-
-        function resetFilters() {
-            document.getElementById('search-input').value = '';
-            document.getElementById('filter-level').value = '0';
-            document.getElementById('filter-sort').value = 'newest';
-            renderListings();
-        }
-
-        function showToast(msg, type = 'success') {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toast-icon');
-            const msgEl = document.getElementById('toast-msg');
-
-            msgEl.textContent = msg;
-            if (type === 'success') {
-                icon.className = "fa-solid fa-circle-check text-yellow-400 text-lg";
-            } else {
-                icon.className = "fa-solid fa-circle-exclamation text-red-500 text-lg";
-            }
-
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3500);
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return String(str)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        fetchListings();
-    </script>
-</body>
-</html>
