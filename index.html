@@ -94,7 +94,7 @@
                         Find a Player!
                     </h1>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                        CEOs can browse active players looking for a home, check their stats, and contact them securely! Post your profile below.
+                        CEOs can browse active players looking for a home, check their stats, and invite them directly! Post your own profile below.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <button id="open-applicant-modal-btn" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg shadow-red-500/20 transition-all transform hover:-translate-y-0.5">
@@ -228,11 +228,6 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Contact Email (Private / Optional)</label>
-                            <input type="email" id="post-email" placeholder="e.g. ceo@rcttouch.com" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                        </div>
-
                         <div class="border-t border-slate-800 pt-4">
                             <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3">Applicant Requirements</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -289,10 +284,6 @@
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your RCT Player ID *</label>
                         <input type="text" id="applicant-id" required placeholder="Found in your RCT Profile settings" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Contact Email (Private / Optional)</label>
-                        <input type="email" id="applicant-email" placeholder="e.g. player@rcttouch.com" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                    </div>
                     <div class="grid grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">Level *</label>
@@ -316,46 +307,6 @@
                     </button>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <!-- ================= MODAL: PRIVATE CONTACT FORM ================= -->
-    <div id="contact-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
-                <div>
-                    <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider">Private Message</span>
-                    <h3 id="contact-modal-title" class="font-display text-xl font-bold text-white">Send Private Message</h3>
-                </div>
-                <button id="close-contact-modal-btn" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="contact-form" class="space-y-4">
-                <input type="hidden" id="contact-recipient-email">
-                <input type="hidden" id="contact-recipient-name">
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your Name *</label>
-                    <input type="text" id="contact-sender-name" required placeholder="e.g. CoasterKing" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Your Email Address *</label>
-                    <input type="email" id="contact-sender-email" required placeholder="you@domain.com" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Your email remains private and is only revealed if they reply to your email.</span>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Message *</label>
-                    <textarea id="contact-message" rows="4" required placeholder="Hi, we're interested in having you join our corporation..." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-
-                <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all">
-                    Send Secure Message
-                </button>
-            </form>
         </div>
     </div>
 
@@ -475,7 +426,6 @@
                         minLevel: item.minLevel || 0,
                         minValue: item.minCompanyValue || item.minValue || '0',
                         minDonations: item.minDonations || 0,
-                        email: item.email || '',
                         rules: item.description || item.rules || ''
                     }));
 
@@ -484,7 +434,6 @@
                         createdAt: item.createdAt ? new Date(item.createdAt).getTime() : Date.now(),
                         name: item.name || item.applicantName || 'Unnamed Player',
                         playerId: item.playerId || '#00000',
-                        email: item.email || '',
                         level: item.level || 1,
                         value: item.value || '0',
                         donations: item.donations || 0,
@@ -544,18 +493,6 @@
             const modal = document.getElementById('applicant-modal');
             if (show) modal.classList.remove('hidden');
             else modal.classList.add('hidden');
-        }
-
-        function openContactModal(email, name) {
-            document.getElementById('contact-recipient-email').value = email;
-            document.getElementById('contact-recipient-name').value = name;
-            document.getElementById('contact-modal-title').textContent = `Message ${name}`;
-            document.getElementById('contact-modal').classList.remove('hidden');
-        }
-
-        function closeContactModal() {
-            document.getElementById('contact-modal').classList.add('hidden');
-            document.getElementById('contact-form').reset();
         }
 
         function openApplyModal(corp) {
@@ -653,15 +590,6 @@
                 const card = document.createElement('div');
                 card.className = "bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-5 flex flex-col justify-between shadow-xl transition-all duration-200 relative group hover:-translate-y-1";
 
-                let contactBtnHtml = '';
-                if (app.email) {
-                    contactBtnHtml = `
-                        <button onclick="openContactModal('${escapeHtml(app.email)}', '${escapeHtml(app.name)}')" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-envelope text-yellow-300"></i> Send Private Message
-                        </button>
-                    `;
-                }
-
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
@@ -699,12 +627,9 @@
                         </div>
                     </div>
 
-                    <div class="space-y-2">
-                        ${contactBtnHtml}
-                        <button onclick="navigator.clipboard.writeText('${escapeHtml(app.playerId)}'); showToast('Copied Player ID to clipboard!');" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-copy text-yellow-300"></i> Copy Player ID for Invite
-                        </button>
-                    </div>
+                    <button onclick="navigator.clipboard.writeText('${escapeHtml(app.playerId)}'); showToast('Copied Player ID to clipboard!');" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-copy text-yellow-300"></i> Copy Player ID for Invite
+                    </button>
                 `;
                 grid.appendChild(card);
             });
@@ -766,15 +691,6 @@
                 const minValue = escapeHtml(String(corp.minValue));
                 const rules = escapeHtml(corp.rules);
 
-                let corpContactHtml = '';
-                if (corp.email) {
-                    corpContactHtml = `
-                        <button onclick="openContactModal('${escapeHtml(corp.email)}', '${escapeHtml(corp.name)}')" class="w-full mb-2 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-envelope text-yellow-300"></i> Contact CEO Securely
-                        </button>
-                    `;
-                }
-
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
@@ -818,12 +734,9 @@
                         </div>
                     </div>
 
-                    <div>
-                        ${corpContactHtml}
-                        <button onclick='openApplyModal(${JSON.stringify(corp)})' class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane text-yellow-300"></i> Apply / Request Invite
-                        </button>
-                    </div>
+                    <button onclick='openApplyModal(${JSON.stringify(corp)})' class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-yellow-300"></i> Apply / Request Invite
+                    </button>
                 `;
                 grid.appendChild(card);
             });
@@ -870,7 +783,6 @@
             document.getElementById('empty-open-applicant-modal-btn').addEventListener('click', () => toggleApplicantModal(true));
             document.getElementById('close-applicant-modal-btn').addEventListener('click', () => toggleApplicantModal(false));
             document.getElementById('close-apply-modal-btn').addEventListener('click', closeApplyModal);
-            document.getElementById('close-contact-modal-btn').addEventListener('click', closeContactModal);
 
             document.getElementById('empty-post-corp-btn').addEventListener('click', () => switchCorpSubTab('post'));
 
@@ -897,39 +809,6 @@
             const filterSort = document.getElementById('filter-sort');
             if (filterSort) filterSort.addEventListener('change', renderListings);
 
-            // Contact Form Submission
-            document.getElementById('contact-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitBtn = e.target.querySelector('button[type="submit"]');
-                submitBtn.textContent = 'Sending Message...';
-                submitBtn.disabled = true;
-
-                const payload = {
-                    type: 'private_message',
-                    recipientEmail: document.getElementById('contact-recipient-email').value,
-                    recipientName: document.getElementById('contact-recipient-name').value,
-                    senderName: document.getElementById('contact-sender-name').value,
-                    senderEmail: document.getElementById('contact-sender-email').value,
-                    message: document.getElementById('contact-message').value
-                };
-
-                try {
-                    await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload)
-                    });
-                    showToast('Private message sent successfully!');
-                    closeContactModal();
-                } catch (err) {
-                    console.error(err);
-                    showToast('Failed to send message.', 'error');
-                } finally {
-                    submitBtn.textContent = 'Send Secure Message';
-                    submitBtn.disabled = false;
-                }
-            });
-
             // Form submissions
             document.getElementById('applicant-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -941,7 +820,6 @@
                     type: 'applicant',
                     applicantName: document.getElementById('applicant-name').value,
                     playerId: document.getElementById('applicant-id').value,
-                    email: document.getElementById('applicant-email').value,
                     level: parseInt(document.getElementById('applicant-level').value),
                     value: document.getElementById('applicant-value').value,
                     donations: parseInt(document.getElementById('applicant-donations').value),
@@ -981,7 +859,6 @@
                     corpId: document.getElementById('post-id').value,
                     memberCount: parseInt(document.getElementById('post-members').value),
                     seekingCount: parseInt(document.getElementById('post-seeking').value),
-                    email: document.getElementById('post-email').value,
                     minLevel: parseInt(document.getElementById('post-min-level').value),
                     minCompanyValue: document.getElementById('post-min-value').value,
                     minDonations: parseInt(document.getElementById('post-min-donations').value),
