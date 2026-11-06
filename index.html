@@ -216,7 +216,7 @@
 
                     <div class="border-t border-slate-800 pt-4">
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Corp Description & Special Rules</label>
-                        <textarea id="post-description" rows="3" placeholder="e.g. Friendly active clan! Epic cards request on weekends only." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
+                        <textarea id="post-description" rows="3" placeholder="e.g. Friendly active corp! Request only Epic cards on weekends." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
                     </div>
 
                     <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-orange-500/20 transition-all">
@@ -345,7 +345,7 @@
                     }));
                 }
             } catch (err) {
-                console.error("Error fetching from Google Sheet:", err);
+                console.error("Error fetching from Database:", err);
             }
             renderListings();
         }
@@ -491,7 +491,7 @@
         async function handlePostCorp(e) {
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Publishing to Google Sheet...';
+            submitBtn.textContent = 'Publishing to Database...';
             submitBtn.disabled = true;
 
             const payload = {
