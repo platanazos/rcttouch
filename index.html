@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCT Touch Corp Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🎢 RCT Touch Corp Hub</h1>
+        <p>Find your next RollerCoaster Tycoon Touch Corporation or list your own!</p>
+    </header>
+
+    <main class="container">
+        <!-- Post Corporation Section -->
+        <section class="card">
+            <h2>Post a Corporation</h2>
+            <form id="corpForm">
+                <input type="text" id="corpName" placeholder="Corporation Name" required>
+                <input type="text" id="corpId" placeholder="Corporation ID" required>
+                <input type="number" id="memberCount" placeholder="Current Members Count" required>
+                <input type="number" id="seekingCount" placeholder="Players Seeking Count" required>
+                <input type="number" id="minLevel" placeholder="Minimum Player Level Required" required>
+                <input type="number" id="minCompanyValue" placeholder="Minimum Company Value Required" required>
+                <input type="number" id="minDonations" placeholder="Minimum Donation Count Required" required>
+                <textarea id="description" placeholder="Rules & Description (e.g., Only request epic cards on weekends)" required></textarea>
+                <button type="submit" class="btn">Publish Listing</button>
+            </form>
+        </section>
+
+        <!-- Corporation Directory -->
+        <section class="card">
+            <h2>Active Corporations</h2>
+            <div id="corpList">Loading active corporations...</div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
