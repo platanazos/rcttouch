@@ -4,7 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RCT Touch Corp Hub</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #38bdf8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            border: 1px solid #475569;
+            background-color: #0f172a;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        .btn {
+            background-color: #0ea5e9;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #0284c7;
+        }
+        .corp-item {
+            background-color: #334155;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #38bdf8;
+        }
+        .warning {
+            color: #f59e0b;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -36,6 +97,115 @@
         </section>
     </main>
 
-    <script src="app.js"></script>
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2XNFK7iywr_JcpMq1Qv3ZQx3FQfWgyuR3CU9zk7o1e-CRQOsdsUtKQMUSchwRfmsJ/exec';
+
+        // Handle publishing a new corporation listing
+        document.getElementById('corpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Publishing...';
+            submitBtn.disabled = true;
+
+            const payload = {
+                type: 'listing',
+                corpName: document.getElementById('corpName').value,
+                corpId: document.getElementById('corpId').value,
+                memberCount: document.getElementById('memberCount').value,
+                seekingCount: document.getElementById('seekingCount').value,
+                minLevel: document.getElementById('minLevel').value,
+                minCompanyValue: document.getElementById('minCompanyValue').value,
+                minDonations: document.getElementById('minDonations').value,
+                description: document.getElementById('description').value
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Corporation listed successfully!');
+                document.getElementById('corpForm').reset();
+                loadCorporations();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to publish listing. Please check your connection.');
+            })
+            .finally(() => {
+                submitBtn.textContent = 'Publish Listing';
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Fetch and display active corporations from Google Sheets
+        function loadCorporations() {
+            const listDiv = document.getElementById('corpList');
+            listDiv.innerHTML = '<p>Loading active corporations...</p>';
+
+            fetch(SCRIPT_URL)
+            .then(response => response.json())
+            .then(data => {
+                if (!data || data.length === 0) {
+                    listDiv.innerHTML = '<p>No active corporations listed right now. Be the first to list one!</p>';
+                    return;
+                }
+
+                const now = new Date().getTime();
+                let html = '';
+                let activeCount = 0;
+
+                data.forEach(corp => {
+                    const createdTime = new Date(corp.createdAt).getTime();
+                    const expiresTime = corp.expiresAt ? new Date(corp.expiresAt).getTime() : createdTime + (3 * 24 * 60 * 60 * 1000);
+                    
+                    if (now > expiresTime) {
+                        return;
+                    }
+
+                    activeCount++;
+                    const hoursRemaining = Math.max(0, Math.round((expiresTime - now) / (1000 * 60 * 60)));
+
+                    html += `
+                        <div class="corp-item">
+                            <h3>${escapeHtml(corp.corpName)} (ID: ${escapeHtml(String(corp.corpId))})</h3>
+                            <p><strong>Members:</strong> ${corp.memberCount} | <span>Seeking:</strong> ${corp.seekingCount} players</p>
+                            <p><strong>Requirements:</strong> Level ${corp.minLevel}+ | Value: ${corp.minCompanyValue}+ | Donations: ${corp.minDonations}+</p>
+                            <p><strong>Rules & Description:</strong> ${escapeHtml(corp.description)}</p>
+                            <p><small>⌛ Listing expires in ~${hoursRemaining} hours</small></p>
+                            <p class="warning">⚠️ <em>Reminder: You must leave your current corporation in RCT Touch to receive an invitation!</em></p>
+                        </div>
+                    `;
+                });
+
+                if (activeCount === 0) {
+                    listDiv.innerHTML = '<p>No active corporations right now (all previous listings have expired after 3 days).</p>';
+                } else {
+                    listDiv.innerHTML = html;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+                listDiv.innerHTML = '<p>Could not load listings. Please refresh to try again.</p>';
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        loadCorporations();
+    </script>
 </body>
 </html>
