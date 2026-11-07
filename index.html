@@ -48,9 +48,9 @@
 <body class="min-h-screen flex flex-col font-sans antialiased custom-scrollbar">
 
     <!-- Top Announcement Banner -->
-    <div class="bg-yellow-500 text-slate-950 text-xs md:text-sm py-2 px-4 text-center font-bold shadow-md flex justify-center items-center gap-2">
-        <i class="fa-solid fa-triangle-exclamation text-slate-950 animate-pulse"></i>
-        <span><strong>Notice:</strong> Applicants must leave their current Corporation before accepting an in-game invite!</span>
+    <div class="bg-blue-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-md flex justify-center items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-yellow-300 animate-pulse"></i>
+        <span><strong>Notice:</strong> You must leave your current Corporation before receiving an in-game invite!</span>
     </div>
 
     <!-- Main Navigation Header -->
@@ -240,7 +240,7 @@
                                     <input type="text" id="post-min-value" value="50M" placeholder="e.g. 50M" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                                 </div>
                                 <div>
-                                    <label class="block text-xs text-slate-400 mb-1">Donation Count</label>
+                                    <label class="block text-xs text-slate-400 mb-1">Min Donations</label>
                                     <input type="number" id="post-min-donations" min="0" value="50" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                                 </div>
                             </div>
@@ -280,19 +280,19 @@
                     <div>
                         <h4 class="text-xs font-bold text-red-300 uppercase tracking-wider">Mandatory Requirement</h4>
                         <p class="text-xs text-red-100 mt-0.5 leading-relaxed">
-                            You <strong>MUST leave your current Corporation</strong> in RollerCoaster Tycoon Touch before a leader can send you an in-game invite!
+                            You <strong>MUST leave your current Corporation</strong> in RollerCoaster Tycoon Touch before you can receive an in-game invite!
                         </p>
                     </div>
                 </div>
 
                 <form id="applicant-form" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">RCTT Nickname *</label>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">RCTT Nickname</label>
                         <input type="text" id="applicant-name" placeholder="e.g. CoasterKing99" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">RCTT Player ID *</label>
-                        <input type="text" id="applicant-id" required placeholder="ID found in RCTT settings on bottom right" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
+                        <input type="text" id="applicant-id" required placeholder="Found in your RCT Profile settings" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">What Are You Looking For? *</label>
